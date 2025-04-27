@@ -37,7 +37,7 @@ def plot_confusion_matrix(cm, class_names, save_path=None):
         plt.savefig(save_path)
         print(f"Confusion matrix saved to {save_path}")
     
-    plt.show()
+    #plt.show()
 
 def log_model_graph(model, input_size=(1, 3, 224, 224), device='cuda'):
     """

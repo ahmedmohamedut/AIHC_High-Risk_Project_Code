@@ -12,15 +12,13 @@ from utils import set_seed, log_model_graph, plot_confusion_matrix
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Brain Tumor Classification')
-    parser.add_argument('--data_dir', type=str, default='brain-tumor-mri-dataset',
-                        help='Directory containing the dataset')
+    parser.add_argument('--data_dir', type=str, default='brain-tumor-mri-dataset', help='Directory containing the dataset')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
-    parser.add_argument('--num_epochs', type=int, default=60, help='Number of epochs')
+    parser.add_argument('--num_epochs', type=int, default=30, help='Number of epochs')
     parser.add_argument('--learning_rate', type=float, default=0.0007, help='Learning rate')
     parser.add_argument('--num_workers', type=int, default=4, help='Number of data loading workers')
     parser.add_argument('--seed', type=int, default=42, help='Random seed')
-    parser.add_argument('--checkpoint_dir', type=str, default='checkpoints',
-                       help='Directory to save checkpoints')
+    parser.add_argument('--checkpoint_dir', type=str, default='checkpoints', help='Directory to save checkpoints')
     parser.add_argument('--patience', type=int, default=7, help='Early stopping patience')
     parser.add_argument('--image_size', type=int, default=224, help='Image size for model input')
     return parser.parse_args()
@@ -31,7 +29,10 @@ def main():
     
     # Set random seed for reproducibility
     set_seed(args.seed)
-    
+
+    # Set default to float32
+    torch.set_default_tensor_type(torch.FloatTensor)
+
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")

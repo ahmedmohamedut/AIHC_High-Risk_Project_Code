@@ -57,7 +57,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler
         all_train_labels = []
         
         for batch_idx, (images, labels) in enumerate(train_loader):
-            images, labels = images.to(device), labels.to(device)
+            images, labels = images.to(device), labels.long().to(device)
             
             # Zero gradients
             optimizer.zero_grad()
@@ -96,7 +96,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, scheduler
         
         with torch.no_grad():
             for images, labels in val_loader:
-                images, labels = images.to(device), labels.to(device)
+                images, labels = images.to(device), labels.long().to(device)
                 
                 # Forward pass
                 outputs = model(images)
